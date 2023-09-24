@@ -1,5 +1,5 @@
 <div class="my-3">
-  <h5 [ngClass]="{ strike: !todo.active }">{{ todo.title }}</h5>
+  <h5 [ngClass]="{ strike: todo.active }">{{ todo.title }}</h5>
   <p>{{ todo.desc }}</p>
   <div class="mb-3 form-check">
     <input
@@ -7,7 +7,7 @@
       class="form-check-input"
       id="exampleCheck1"
       (click)="onCheckboxClick(todo)"
-      [checked]="!todo.active"
+      [checked]="todo.active"
     />
     <label class="form-check-label" for="exampleCheck1">Done</label>
   </div>
