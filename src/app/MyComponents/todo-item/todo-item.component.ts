@@ -14,6 +14,8 @@ export class TodoItemComponent implements OnInit {
   @Output() todoCheckbox: EventEmitter<Todo> = new EventEmitter();
 
   isEditing = false;
+  editableTodo: Todo | null = null;
+
 
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
