@@ -9,7 +9,11 @@ import { AddTodoComponent } from './MyComponents/add-todo/add-todo.component';
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './MyComponents/about/about.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { HomepageComponent } from './MyComponents/homepage/homepage.component';
+import { HeaderComponent } from './MyComponents/header/header.component';
+import { LoginComponent } from './MyComponents/login/login.component';
+import { SignupComponent } from './MyComponents/signup/signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,15 +21,20 @@ import { HttpClientModule } from '@angular/common/http';
     TodosComponent,
     TodoItemComponent,
     AddTodoComponent,
-    AboutComponent
+    AboutComponent,
+    HomepageComponent,
+    HeaderComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
