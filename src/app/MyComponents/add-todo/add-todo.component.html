@@ -1,30 +1,38 @@
-<div class="my-7">
-  <h4>Add a Todo</h4>
-  <form (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="title" class="form-label">Todo Title</label>
-      <input
-        [(ngModel)]="title"
-        type="text"
-        class="form-control"
-        id="title"
-        name="title"
-        value="title"
-        required
-      />
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Add a Todo</h4>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="title" class="form-label">Todo Title</label>
+              <input
+                [(ngModel)]="title"
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <input
+                [(ngModel)]="desc"
+                type="text"
+                class="form-control"
+                id="desc"
+                name="desc"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Add Todo</button>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <input
-        [(ngModel)]="desc"
-        type="text"
-        class="form-control"
-        id="desc"
-        name="desc"
-        value="desc"
-        required
-      />
-    </div>
-    <button type="submit" class="btn btn-sm btn-primary">Add Todo</button>
-  </form>
+  </div>
 </div>
