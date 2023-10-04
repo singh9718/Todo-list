@@ -25,9 +25,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   loginUser() {
-    localStorage.removeItem('authToken')
-    this.isLoggedIn=false;
-    // console.log(localStorage);
+    localStorage.removeItem('authToken');
+    this.isLoggedIn = false;
   }
-
 }

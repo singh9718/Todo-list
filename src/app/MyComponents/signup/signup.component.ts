@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from 'src/services/api.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,19 +15,22 @@ export class SignupComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private http: HttpClient
+    private apiService: ApiService
   ) {
-    this.signupForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]],
-    }, { validator: this.passwordMatchValidator });
+    this.signupForm = this.fb.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required]],
+      },
+      { validator: this.passwordMatchValidator }
+    );
   }
 
   email: string = '';
   password: string = '';
-  confirmpassword: string= '';
-  
+  confirmpassword: string = '';
+
   passwordMatchValidator(formGroup: FormGroup) {
     const passwordControl = formGroup.get('password');
     const confirmPasswordControl = formGroup.get('confirmPassword');
@@ -51,7 +54,7 @@ export class SignupComponent {
   onSignup() {
     if (this.signupForm.valid) {
       const formData = this.signupForm.value;
-      this.http.post('http://localhost:3000/api/v1/signup', formData).subscribe(
+      this.apiService.signup(formData).subscribe(
         (response) => {
           console.log('Signup successful', response);
           this.router.navigate(['/login']);
