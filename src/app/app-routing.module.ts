@@ -1,21 +1,30 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { TodosComponent } from './MyComponents/todos/todos.component';
 import { AboutComponent } from './MyComponents/about/about.component';
 import { HomepageComponent } from './MyComponents/homepage/homepage.component';
 import { LoginComponent } from './MyComponents/login/login.component';
 import { SignupComponent } from './MyComponents/signup/signup.component';
+import { AuthGuard } from 'src/services/AuthGuard';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'todo', component: TodosComponent },
+  {
+    path: 'todo',
+    component: TodosComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
 ];
 
+const routerOptions: ExtraOptions = {
+  enableTracing: true, // Enable tracing
+};
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

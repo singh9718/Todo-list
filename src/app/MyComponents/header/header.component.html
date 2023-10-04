@@ -15,9 +15,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/todo">Todo</a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link active" routerLink="/about">About</a>
           </li>
@@ -27,14 +25,18 @@
       <div>
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link active" routerLink="/login">Login</a>
+            <a
+              class="nav-link active"
+              routerLink="/login"
+              (click)="loginUser()"
+              >{{ isLoggedIn ? "Logout" : "Login" }}</a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link active" routerLink="/signup">Signup</a>
           </li>
         </ul>
       </div>
-
     </div>
   </nav>
 </div>

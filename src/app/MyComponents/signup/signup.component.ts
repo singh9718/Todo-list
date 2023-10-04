@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SignupComponent {
   signupForm!: FormGroup;
+  isConfirmPasswordTouched: boolean = false;
 
   constructor(
     private router: Router,
@@ -19,11 +20,33 @@ export class SignupComponent {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-    });
+      confirmPassword: ['', [Validators.required]],
+    }, { validator: this.passwordMatchValidator });
   }
 
   email: string = '';
   password: string = '';
+  confirmpassword: string= '';
+  
+  passwordMatchValidator(formGroup: FormGroup) {
+    const passwordControl = formGroup.get('password');
+    const confirmPasswordControl = formGroup.get('confirmPassword');
+
+    if (passwordControl && confirmPasswordControl) {
+      const password = passwordControl.value;
+      const confirmPassword = confirmPasswordControl.value;
+
+      if (password !== confirmPassword) {
+        confirmPasswordControl.setErrors({ passwordsNotMatching: true });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
+    }
+  }
+
+  setPasswordTouched() {
+    this.isConfirmPasswordTouched = true;
+  }
 
   onSignup() {
     if (this.signupForm.valid) {

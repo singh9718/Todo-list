@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit  } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+
 
 
 @Component({
@@ -10,15 +11,19 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+
+
   loginForm!: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private http: HttpClient) {
+  constructor(private router: Router, private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
+
+  
 
   email: string = '';
   password: string = '';
@@ -47,7 +52,8 @@ export class LoginComponent {
         (response: any) => {
           if (response.token) {
             console.log('Login successful');
-            console.log('Token:', response.token); // Log the token here
+            console.log('Token:', response.token); 
+            localStorage.setItem('authToken',response.token)
             this.router.navigate(['/todo']);
           } else {
             console.error('Token not found in the response');
@@ -55,9 +61,17 @@ export class LoginComponent {
         },
         (error) => {
           console.error('Login failed', error);
-          // Handle login failure, display an error message, etc.
+
         }
       );
     }
   }
+  ngOnInit() {}
+
+
+  // redirectToTodo() {
+  //   const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  //   this.router.navigateByUrl(returnUrl);
+  // }
+  
 }
