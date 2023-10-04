@@ -35,4 +35,19 @@ export class ApiService {
       todo
     );
   }
+
+  login(todo: Todo): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      'http://localhost:3000/api/v1/login',
+      todo
+    );
+  }
+
+  signup(todo: Todo): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      'http://localhost:3000/api/v1/signup',
+      todo
+    );
+  }
+
 }
